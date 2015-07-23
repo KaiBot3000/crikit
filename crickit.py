@@ -1,29 +1,39 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, request
+from flask_debugtoolbar import DebugToolbarExtension
 
 app=Flask(__name__)
 
 
+app.secret_key = 'crikits_chirping'
 
 
 @app.route('/')
 def index_page():
 	return render_template('home_crickit.html')
 
+@app.route('/chirp', methods=['POST'])
+def chirp():
+	choice = request.form.get('user_choice')
+	chirp_time = '0'
 
-	# render_template("templates/base_crickit.html")
+	if choice == 'use_user_temperature':
+		temp = request.form.get('user_input')
+		chirp_time = str(chirp_calc(temp))
 
-# @app.route('/chirp')
-# def chirp():
-	# #if number entered, 
-	# 	temp = number.
-	# elif "get my temp" selected
-	# 	temp = get_temp_from_ip()
-	#
-	# chirp_time = chirp_calc(temp)
-	#
-	# pass chirp_time to js
+	else:
+		flash("I haven't made that yet :( ")
+
+	return render_template('chirp_crickit.html', chirp_time=chirp_time)
 
 
+
+def chirp_calc(temp):
+	# uses temp to determine time interval btwn chirps
+	temp = float(temp)
+	chirps_per_minute = 40 + 4 * (temp - 50)
+	#chirps_per_ms = chirps_per_minute * (1 / 60000)
+	chirp_time = 60000 / chirps_per_minute
+	return chirp_time
 
 
 
@@ -36,10 +46,7 @@ def index_page():
 	#
 	# return temp
 
-# def chirp_calc(temp)
-	# uses temp to determine time interval btwn chirps
-	#
-	# return chirp_time
+
 
 # def get_location(ip)
 	# gets location 

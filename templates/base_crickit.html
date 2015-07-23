@@ -6,9 +6,18 @@
 
 <body >
 	{% block BODYBLOCK %}
-		<!-- I may have to run this on the server :( -->
+		
 	{% endblock %}
 
-</body>
+	<ul>
+		{% for message in get_flashed_messages() %}
+			<li> {{ message }} </li>
+		{% endfor %}
+	</ul>
 
+</body>
+<script>
+{% block SCRIPTBLOCK %}
+{% endblock %}
+</script>
 </html>
