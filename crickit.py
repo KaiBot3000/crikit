@@ -1,17 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template
 
-app=Flask(__crickit__)
+app=Flask(__name__)
 
-if __crickit__ == "__main__":
-	app.run(debug=True)
+
 
 
 @app.route('/')
-def home_page():
-	return homepage.html
+def index_page():
+	return render_template('home_crickit.html')
 
-@app.route('/chirp')
-def chirp():
+
+	# render_template("templates/base_crickit.html")
+
+# @app.route('/chirp')
+# def chirp():
 	# #if number entered, 
 	# 	temp = number.
 	# elif "get my temp" selected
@@ -43,7 +45,8 @@ def chirp():
 	# gets location 
 	# returns location in format wunderground can use
 
-
+if __name__ == "__main__":
+	app.run(debug=True)
 
 
 

@@ -1,7 +1,7 @@
-{% extends base_crickit.html %}
+{% extends 'base_crickit.html' %}
 
-{% block form_block %}
-<form>
+{% block BODYBLOCK %}
+<form action="/chirp">
 	<input type="radio" name="user_choice" value="use_user_location"> Get temperature for my location
 	<br><br>
 	<input type="radio" name="user_choice" value="use_user_temperature"> Use this temperature:
