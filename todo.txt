@@ -1,0 +1,22 @@
+BASIC FUNCTIONALITY
+O chirp
+	O play noises!
+	O time noises
+O get location
+O get temperature from location
+	O figure out API
+	
+
+WANTED FUNCTIONALITY
+O control submissions
+	O keep home from submitting until selected
+	O if enter temp selected, keep from submitting until filled
+	O check for number-ability
+	O flash messages for either error
+
+
+AESTHETICS
+0 nice background
+O make buttons prettier
+O resize and add 'crickit' logo to picture
+O make text box smaller/translucent/colored
