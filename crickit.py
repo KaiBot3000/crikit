@@ -4,12 +4,12 @@ from flask_debugtoolbar import DebugToolbarExtension
 app=Flask(__name__)
 
 
-app.secret_key = 'crikits_chirping'
+app.secret_key = 'crickits_chirping'
 
 
-@app.route('/')
+@app.route('/crickit')
 def index_page():
-	return render_template('home_crickit.html')
+	return render_template('base_crickit.html')
 
 @app.route('/chirp', methods=['POST'])
 def chirp():
@@ -23,7 +23,7 @@ def chirp():
 	else:
 		flash("I haven't made that yet :( ")
 
-	return render_template('chirp_crickit.html', chirp_time=chirp_time)
+	return render_template('base_crickit.html', chirp_time=chirp_time)
 
 
 

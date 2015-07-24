@@ -6,3 +6,10 @@ body {
 	font-size: 2em;
 }
 
+#start_chirp {
+	display: block;
+}
+
+#stop_chirp {
+	display: none;
+}

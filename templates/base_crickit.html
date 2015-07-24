@@ -5,9 +5,30 @@
 </head>
 
 <body >
-	{% block BODYBLOCK %}
+	<!-- test line -->
+	<div id="test_box"> </div>
+
+	<div id="start_chirp_div">
+		<br><br><br><br><br><br><br><br><br>
+		<form action="/chirp", method="post">
+			<input type="radio" name="user_choice" value="use_user_location"> Get temperature for my location
+			<br><br>
+			<input type="radio" name="user_choice" value="use_user_temperature"> Use this temperature:
+			<input type="text" name="user_input" id="temp_input">
+			<br><br>
+			<input type="submit" id="start_chirping_button" value="Chirp">
+		</form>
+	</div>
+
+	<div id="stop_chirp_div">
+		<br><br><br><br><br><br><br><br><br>
+		<form action="/">
+			<input type="submit" id="stop_chirping_button" value="Stop Chirping">
+		</form>
 		
-	{% endblock %}
+		<!-- test lines -->
+		<!-- <p>{{ chirp_time }} between each chirp</p> -->
+	</div>
 
 	<ul>
 		{% for message in get_flashed_messages() %}
@@ -16,8 +37,43 @@
 	</ul>
 
 </body>
-<script>
-{% block SCRIPTBLOCK %}
-{% endblock %}
+<script src="https://code.jquery.com/jquery.js"> </script>
+<!-- <script src="/static/crickit.js"></script> -->
+
+<script> 
+
 </script>
+<script>
+console.log("im in the console");
+var start_chirp = document.getElementById("start_chirp_div");
+var stop_chirp = document.getElementById("stop_chirp_div");
+
+//$('#start_chirp_div').hide();
+
+function got_chirp_info(chirp_time){
+	stop_chirp.setAttribute("display", "block");
+	$('#test_box').html("randomly running unused function WTF")
+};
+
+function startChirping(){
+	console.log("got into startChirping");
+	$('#start_chirp_div').hide();
+	var info = {"user_choice": $("input[name=user_choice]:checked").val(), "temp": $("#temp_input").val()};
+	console.log(info)
+	//$.post('/chirp', info, got_chirp_info(chirp_time));
+};
+
+function stopChirping() {
+	//$.get("/crickit", function {
+		// change display of start_chirp to block
+		// start_chirp.setAttribute("display", "block");
+	//})
+	};
+
+$("#start_chirping_button").on('click', startChirping);
+
+$("#stop_chirping_button").on('click', stopChirping);
+
+</script>
+
 </html>

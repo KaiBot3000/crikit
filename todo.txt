@@ -5,6 +5,9 @@ O chirp
 O get location
 O get temperature from location
 	O figure out API
+O make html one page
+	O seperate forms in divs
+O implement ajax
 
 
 WANTED FUNCTIONALITY
@@ -19,5 +22,6 @@ O control submissions
 AESTHETICS
 0 nice background
 O make buttons prettier
-O resize and add 'crickit' logo to picture
+O resize
+O add 'crickit' logo to footer
 O make text box smaller/translucent/colored
