@@ -9,13 +9,15 @@ app.secret_key = 'crickits_chirping'
 
 @app.route('/crickit')
 def index_page():
-	temp = request.args.get('test_info')
+	#temp = request.args.get('test_info')
+	# temp = 'random string'
 	return render_template('base_crickit.html')
 
-@app.route('/chirp') #use GET, because we're not changing anything serverside
+@app.route('/chirp') 
 def chirp():
-	test_info = request.args.get('test_info')
-	print test_info
+	test_string = 'random string'
+	# test_info = request.args.get('test_info')
+	# print test_info
 	# choice = request.args.get('user_choice')
 	# chirp_time = '0'
 
@@ -28,7 +30,7 @@ def chirp():
 
 	# return render_template('base_crickit.html', chirp_time=chirp_time)
 
-	return render_template('base_crickit.html')
+	return test_string
 
 
 # def chirp_calc(temp):

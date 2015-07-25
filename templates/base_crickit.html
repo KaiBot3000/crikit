@@ -7,21 +7,20 @@
 <body >
 	<!-- test line -->
 	<div id="test_box"> </div>
-	<br><br><br><br><br><br><br><br>
+	
 	<div id="start_chirp_div">
-		<!-- <br><br><br><br><br><br><br><br><br> -->
+		<br><br><br><br><br><br>
 		<form action="/chirp">
 			<input type="radio" name="user_choice" value="use_user_location"> Get temperature for my location
 			<br><br>
-			<input type="radio" name="user_choice" value="use_user_temperature"> Use this temperature:
-			<input type="text" name="user_input" id="temp_input">
+			<input type="text" name="user_choice" id="temp_input"> Use this temperature
 			<br><br>
 			<input type="submit" id="start_chirping_button" value="Chirp">
 		</form>
 	</div>
 
 	<div id="stop_chirp_div">
-		<!-- <br><br><br><br><br><br><br><br><br> -->
+		<br><br><br><br><br><br><br><br><br><br>
 		<form action="/crickit">
 			<input type="submit" id="stop_chirping_button" value="Stop Chirping">
 		</form>
@@ -50,19 +49,20 @@ $(stop_chirp).hide();
 
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
+//$(stop_button).hide();
 
 //$('#start_chirp_div').hide();
 
-function got_chirp_info(chirp_time) {
-	stop_chirp.setAttribute("display", "block");
-	$('#test_box').html("randomly running unused function WTF")
-};
+// function got_chirp_info(chirp_time) {
+// 	stop_chirp.setAttribute("display", "block");
+// 	$('#test_box').html("randomly running unused function WTF")
+// };
 
 
 function startChirping(evt) {
 	//doesn't submit, toggle start/stop. Passes user input to .py
 	//later, does stuff to make chirp noise or calls helper function
-	console.log("got into startChirping");
+	//console.log("got into startChirping");
 	//don't submit
 	evt.preventDefault();
 	//toggle start stop
@@ -70,13 +70,11 @@ function startChirping(evt) {
 	$(stop_chirp).toggle();
 	//$('#start_chirp_div').hide(); //using declared names and toggle instead
 	var test_info = $("#temp_input").val();
-	console.log(test_info);
+	//console.log(test_info);
 	// eventually want to pass both choice and info, maybe as dictionary?
 	//var info = {"user_choice": $("input[name=user_choice]:checked").val(), "temp": $("#temp_input").val()};
 
-	$.get('/chirp', test_info, function(test_info){
-		console.log(test_info);
-	});
+	$.get('/chirp', function (server_info){console.log('got into ajax');});
 	//$.get('/chirp', info, got_chirp_info(chirp_time));
 };
 
@@ -89,9 +87,9 @@ function stopChirping(evt) {
 };
 	
 
-$(start_button).on('click', startChirping);
-//$("#start_chirping_button").on('submit', startChirping);
-$("#stop_chirping_button").on('submit', stopChirping);
+
+$("#start_chirping_button").on('click', startChirping);
+$("#stop_chirping_button").on('click', stopChirping);
 
 </script>
 

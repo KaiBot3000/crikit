@@ -5,9 +5,10 @@ O chirp
 O get location
 O get temperature from location
 	O figure out API
-O make html one page
-	O seperate forms in divs
+0 make html one page
+	0 seperate forms in divs
 O implement ajax
+O figure out buttons (http://jsfiddle.net/T7gE7/4/)
 
 
 WANTED FUNCTIONALITY
@@ -17,6 +18,7 @@ O control submissions
 	O check for number-ability
 	O note range of possible chirp temps (or throw error?)
 	O flash messages for either error
+
 
 
 AESTHETICS
