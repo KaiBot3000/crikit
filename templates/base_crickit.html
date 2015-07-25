@@ -49,9 +49,6 @@ $(stop_chirp).hide();
 
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
-//$(stop_button).hide();
-
-//$('#start_chirp_div').hide();
 
 // function got_chirp_info(chirp_time) {
 // 	stop_chirp.setAttribute("display", "block");
@@ -62,15 +59,14 @@ var start_button = document.getElementById("start_chirping_button");
 function startChirping(evt) {
 	//doesn't submit, toggle start/stop. Passes user input to .py
 	//later, does stuff to make chirp noise or calls helper function
-	//console.log("got into startChirping");
-	//don't submit
+
 	evt.preventDefault();
-	//toggle start stop
+
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
-	//$('#start_chirp_div').hide(); //using declared names and toggle instead
-	var test_info = $("#temp_input").val();
-	//console.log(test_info);
+
+	var test_info = $("#temp_input").val(); 
+
 	// eventually want to pass both choice and info, maybe as dictionary?
 	//var info = {"user_choice": $("input[name=user_choice]:checked").val(), "temp": $("#temp_input").val()};
 
