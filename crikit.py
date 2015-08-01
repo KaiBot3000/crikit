@@ -15,7 +15,7 @@ def index_page():
 
 @app.route('/chirp') 
 def chirp():
-	test_string = 'random string'
+	test_string = 'ajax didn\'t run, bro'
 	# test_info = request.args.get('test_info')
 	# print test_info
 	# choice = request.args.get('user_choice')

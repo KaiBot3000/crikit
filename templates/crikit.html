@@ -11,10 +11,10 @@
 	<div id="start_chirp_div">
 		<br><br><br><br><br><br>
 		<form action="/chirp">
-			<input type="radio" name="user_choice" value="use_user_location"> Get temperature for my location
+			<input type="radio" class ="choice" name="user_choice" value="use_user_location"> Get temperature for my location
 			<br><br>
-			<input type="radio" name="user_choice" value="use_user_temp">
-			<input type="text" name="user_choice" id="temp_input"> Use this temperature
+			<input type="radio" class ="choice" name="user_choice" value="use_user_temp">
+			<input type="text" name="user_text" id="temp_input"> Use this temperature
 			<br><br>
 			<input type="submit" id="start_chirping_button" value="Chirp">
 		</form>
@@ -64,11 +64,16 @@ function startChirping(evt) {
 	//later, does stuff to make chirp noise or calls helper function
 	
 	changeChirp(evt);
+	console.log("hey, I'm logging");
+	var temp = $("#temp_input").val(); 
+	var user_choice = $("input[name=user_choice]:checked").val();
 
-	var test_info = $("#temp_input").val(); 
+	console.log("user choice: " + user_choice);
+	console.log("temp input: " + temp);
 
 	// eventually want to pass both choice and info, maybe as dictionary?
 	//var info = {"user_choice": $("input[name=user_choice]:checked").val(), "temp": $("#temp_input").val()};
+	// probably makes more sense to pass two variables.
 
 	$.get('/chirp', function (server_info){console.log('got into ajax');});
 	//$.get('/chirp', info, got_chirp_info(chirp_time));
