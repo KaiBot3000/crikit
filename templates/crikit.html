@@ -14,7 +14,7 @@
 			<input type="radio" class ="choice" name="user_choice" value="use_user_location"> Get temperature for my location
 			<br><br>
 			<input type="radio" class ="choice" name="user_choice" value="use_user_temp">
-			<input type="text" name="user_text" id="temp_input"> Use this temperature
+			<input type="text" name="user_temp" id="temp_input"> Use this temperature
 			<br><br>
 			<input type="submit" id="start_chirping_button" value="Chirp">
 		</form>
@@ -53,7 +53,7 @@ var start_button = document.getElementById("start_chirping_button");
 
 function changeChirp(evt) { 
 	//doesn't submit, hides stop and shows start. 
-	console.log("hit changeChirp()");
+	console.log("run changeChirp()");
 	evt.preventDefault();
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
@@ -64,19 +64,28 @@ function startChirping(evt) {
 	//later, does stuff to make chirp noise or calls helper function
 	
 	changeChirp(evt);
-	console.log("hey, I'm logging");
-	var temp = $("#temp_input").val(); 
-	var user_choice = $("input[name=user_choice]:checked").val();
+	console.log("re-enters startChirping");
 
-	console.log("user choice: " + user_choice);
-	console.log("temp input: " + temp);
+	// Sets path to chirp with variables from form
+	var url = "/chirp?" + $("form").serialize();
 
-	// eventually want to pass both choice and info, maybe as dictionary?
-	//var info = {"user_choice": $("input[name=user_choice]:checked").val(), "temp": $("#temp_input").val()};
-	// probably makes more sense to pass two variables.
+	// prints out url to console
+	console.log("user info url: " + url);
 
-	$.get('/chirp', function (server_info){console.log('got into ajax');});
-	//$.get('/chirp', info, got_chirp_info(chirp_time));
+	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize data.
+	// $.get(url, makeChirps(data));
+
+	// Using an anonymous function that calls makeChirp works. Hm.
+	$.get(url, function (results) {
+		makeChirps(results);
+	});
+
+};
+
+
+function makeChirps(chirp_time) {
+	console.log("got into chirp_time");
+	console.log(chirp_time);
 };
 
 
@@ -85,7 +94,6 @@ function stopChirping(evt) {
 	changeChirp(evt);
 
 };
-	
 
 
 $("#start_chirping_button").on('click', startChirping);

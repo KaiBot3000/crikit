@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, request
 from flask_debugtoolbar import DebugToolbarExtension
+import json
 
 app=Flask(__name__)
 
@@ -15,20 +16,16 @@ def index_page():
 
 @app.route('/chirp') 
 def chirp():
-	test_string = 'ajax didn\'t run, bro'
-	# test_info = request.args.get('test_info')
-	# print test_info
-	# choice = request.args.get('user_choice')
-	# chirp_time = '0'
 
-	# if choice == 'use_user_temperature':
-	# 	temp = request.args.get('user_input')
-	# 	chirp_time = str(chirp_calc(temp))
+	# Gets user info from url
+	choice = request.args.get('user_choice')
+	temp = request.args.get('user_temp')
 
-	# else:
-	# 	flash("I haven't made that yet :( ")
+	# Checks that above is getting correctly
+	print "user chose %s with %s" % (choice, temp)
 
-	# return render_template('base_crikit.html', chirp_time=chirp_time)
+	# Set to string w/info for check
+	test_string = "user chose %s with %s" % (choice, temp)
 
 	return test_string
 
