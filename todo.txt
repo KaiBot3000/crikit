@@ -1,6 +1,7 @@
 BASIC FUNCTIONALITY
 O chirp
 	http://www.createjs.com/tutorials/Basics%20and%20Best%20Practices/
+	$.playSound('http://example.org/sound'); //that simple?
 	O play noises!
 	O time noises
 O get location

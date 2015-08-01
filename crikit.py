@@ -4,14 +4,14 @@ from flask_debugtoolbar import DebugToolbarExtension
 app=Flask(__name__)
 
 
-app.secret_key = 'crickits_chirping'
+app.secret_key = 'crickets_chirping'
 
 
-@app.route('/crickit')
+@app.route('/crikit')
 def index_page():
 	#temp = request.args.get('test_info')
 	# temp = 'random string'
-	return render_template('base_crickit.html')
+	return render_template('crikit.html')
 
 @app.route('/chirp') 
 def chirp():
@@ -40,10 +40,6 @@ def chirp():
 # 	#chirps_per_ms = chirps_per_minute * (1 / 60000)
 # 	chirp_time = 60000 / chirps_per_minute
 # 	return chirp_time
-
-
-
-
 
 
 # def get_temp_from_ip(ip)
