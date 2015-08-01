@@ -28,7 +28,7 @@ def chirp():
 	# else:
 	# 	flash("I haven't made that yet :( ")
 
-	# return render_template('base_crickit.html', chirp_time=chirp_time)
+	# return render_template('base_crikit.html', chirp_time=chirp_time)
 
 	return test_string
 
