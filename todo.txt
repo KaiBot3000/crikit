@@ -9,6 +9,7 @@ O get temperature from location
 	0 seperate forms in divs
 O implement ajax
 O figure out buttons (http://jsfiddle.net/T7gE7/4/)
+	// need buttons to interact in radio way, but allow text.
 
 
 WANTED FUNCTIONALITY

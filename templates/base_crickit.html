@@ -55,15 +55,18 @@ var start_button = document.getElementById("start_chirping_button");
 // 	$('#test_box').html("randomly running unused function WTF")
 // };
 
-
-function startChirping(evt) {
-	//doesn't submit, toggle start/stop. Passes user input to .py
-	//later, does stuff to make chirp noise or calls helper function
-
+function changeChirp() { 
+	//doesn't submit, hides stop and shows start. 
 	evt.preventDefault();
-
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
+};
+
+function startChirping(evt) {
+	//Passes user input to .py
+	//later, does stuff to make chirp noise or calls helper function
+	
+	changeChirp()
 
 	var test_info = $("#temp_input").val(); 
 
@@ -76,10 +79,9 @@ function startChirping(evt) {
 
 
 function stopChirping(evt) { 
-	//doesn't submit, hides stop and shows start. 
-	evt.preventDefault();
-	$(start_chirp).toggle();
-	$(stop_chirp).toggle();
+
+	changeChirp()
+
 };
 	
 
