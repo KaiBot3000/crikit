@@ -50,13 +50,9 @@ $(stop_chirp).hide();
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
 
-// function got_chirp_info(chirp_time) {
-// 	stop_chirp.setAttribute("display", "block");
-// 	$('#test_box').html("randomly running unused function WTF")
-// };
-
 function changeChirp() { 
 	//doesn't submit, hides stop and shows start. 
+	
 	evt.preventDefault();
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
