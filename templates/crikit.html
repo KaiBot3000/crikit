@@ -13,6 +13,7 @@
 		<form action="/chirp">
 			<input type="radio" name="user_choice" value="use_user_location"> Get temperature for my location
 			<br><br>
+			<input type="radio" name="user_choice" value="use_user_temp">
 			<input type="text" name="user_choice" id="temp_input"> Use this temperature
 			<br><br>
 			<input type="submit" id="start_chirping_button" value="Chirp">
@@ -50,9 +51,9 @@ $(stop_chirp).hide();
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
 
-function changeChirp() { 
+function changeChirp(evt) { 
 	//doesn't submit, hides stop and shows start. 
-	
+	console.log("hit changeChirp()");
 	evt.preventDefault();
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
@@ -62,7 +63,7 @@ function startChirping(evt) {
 	//Passes user input to .py
 	//later, does stuff to make chirp noise or calls helper function
 	
-	changeChirp()
+	changeChirp(evt);
 
 	var test_info = $("#temp_input").val(); 
 
@@ -76,7 +77,7 @@ function startChirping(evt) {
 
 function stopChirping(evt) { 
 
-	changeChirp()
+	changeChirp(evt);
 
 };
 	
