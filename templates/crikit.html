@@ -50,7 +50,7 @@ var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
 // needed for sound.js
 var soundID = "Chirp";
-
+var keep_chirping = 1;
 
 // sets initial state for site
 $(start_chirp).show();
@@ -60,10 +60,12 @@ function loadSound() {
 	createjs.Sound.registerSound("static/crikit_chirp.mp3", soundID);
 };
 
-function playSound() {
-	while (keep_chirping === True) {
-		createjs.Sound.play(soundID);
-};
+// function playSound() {
+// 	//while (keep_chirping === 1) {
+// 		createjs.Sound.play(soundID);
+// 	//};
+// };
+
 
 
 
@@ -105,14 +107,18 @@ function startChirping(evt) {
 
 };
 
+function setWorks() {
+	console.log("setInterval is setting");
+};
+
 
 function makeChirps(chirp_time) {
 	// Takes in a time between chirps, and chirps at that interval. Returns nothing.
-	//if (chirp_time) {	
-	var chirping = setInterval(playSound, chirp_time);
-	console.log("chirp_time party, woo!");
-	//};
 
+	//setInterval(playSound, chirp_time);
+	setInterval(setWorks, chirp_time);
+	console.log("chirp_time party, woo!");
+	
 	// test: 
 	console.log("got into chirp_time");
 	console.log(chirp_time);
@@ -123,6 +129,7 @@ function stopChirping(evt) {
 	// stop chirping and return to start page.
 
 	changeChirp(evt);
+	keep_chirping = 0;
 	// clearInterval(chirping);
 	// Will need to stop chirping, too.
 
