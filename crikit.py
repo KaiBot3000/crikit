@@ -26,7 +26,7 @@ def chirp():
 	# Set to string w/info for check
 	test_string = "user chose %s with %s" % (choice, temp)
 
-	chirp_time = 0
+	chirp_time = None
 	if choice == "use_user_temp":
 		chirp_time = chirp_calc(temp)
 
@@ -45,7 +45,7 @@ def chirp():
 
 def chirp_calc(temp):
 	"""uses temp to determine time interval btwn chirps"""
-	
+
 	temp = float(temp)
 	chirps_per_minute = 40 + 4 * (temp - 50)
 	chirp_time = 60000 / chirps_per_minute
