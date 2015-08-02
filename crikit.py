@@ -43,6 +43,7 @@ def chirp():
 
 # 	return temp
 
+
 def chirp_calc(temp):
 	"""uses temp to determine time interval btwn chirps"""
 

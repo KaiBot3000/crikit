@@ -61,7 +61,8 @@ function loadSound() {
 };
 
 function playSound() {
-	createjs.Sound.play(soundID);
+	while (keep_chirping === True) {
+		createjs.Sound.play(soundID);
 };
 
 
@@ -96,7 +97,7 @@ function startChirping(evt) {
 	console.log("user info url: " + url);
 
 	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize data.
-	// $.get(url, makeChirps(data));
+	// $.get(url, makeChirps(results));
 	// Using an anonymous function that calls makeChirp works. Hm.
 	$.get(url, function (results) {
 		makeChirps(results);
@@ -107,9 +108,10 @@ function startChirping(evt) {
 
 function makeChirps(chirp_time) {
 	// Takes in a time between chirps, and chirps at that interval. Returns nothing.
-	if (chirp_time) {
-		var chirping = setInterval(playSound, chirp_time);
-	};
+	//if (chirp_time) {	
+	var chirping = setInterval(playSound, chirp_time);
+	console.log("chirp_time party, woo!");
+	//};
 
 	// test: 
 	console.log("got into chirp_time");
@@ -121,7 +123,7 @@ function stopChirping(evt) {
 	// stop chirping and return to start page.
 
 	changeChirp(evt);
-	clearInterval(chirping);
+	// clearInterval(chirping);
 	// Will need to stop chirping, too.
 
 };
