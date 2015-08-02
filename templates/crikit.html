@@ -42,39 +42,48 @@
 
 
 <script>
-console.log("im in the script");
+// assigns variables to elements
 var start_chirp = document.getElementById("start_chirp_div");
 var stop_chirp = document.getElementById("stop_chirp_div");
-$(start_chirp).show();
-$(stop_chirp).hide();
-
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
 
+// sets initial state for site
+$(start_chirp).show();
+$(stop_chirp).hide();
+
+
 function changeChirp(evt) { 
 	//doesn't submit, hides stop and shows start. 
-	console.log("run changeChirp()");
+
+	// test:
+	console.log("changeChirp() runs");
+
+	// don't submit form
 	evt.preventDefault();
+
+	// toggle which div shows on site
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
 };
 
+
 function startChirping(evt) {
 	//Passes user input to .py
-	//later, does stuff to make chirp noise or calls helper function
 	
 	changeChirp(evt);
+
+	// test:
 	console.log("re-enters startChirping");
 
-	// Sets path to chirp with variables from form
+	// Sets path to chirp with variables from html form
 	var url = "/chirp?" + $("form").serialize();
 
-	// prints out url to console
+	// test: prints out url to console
 	console.log("user info url: " + url);
 
 	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize data.
 	// $.get(url, makeChirps(data));
-
 	// Using an anonymous function that calls makeChirp works. Hm.
 	$.get(url, function (results) {
 		makeChirps(results);
@@ -84,18 +93,24 @@ function startChirping(evt) {
 
 
 function makeChirps(chirp_time) {
+	// Takes in a time between chirps, and chirps at that interval. Returns nothing.
+
+	// test: 
 	console.log("got into chirp_time");
 	console.log(chirp_time);
 };
 
 
 function stopChirping(evt) { 
+	// stop chirping and return to start page.
 
 	changeChirp(evt);
 
+	// Will need to stop chirping, too.
+
 };
 
-
+// Calls appropriate function for button clicks.
 $("#start_chirping_button").on('click', startChirping);
 $("#stop_chirping_button").on('click', stopChirping);
 
