@@ -54,7 +54,7 @@ $(stop_chirp).hide();
 
 
 function changeChirp(evt) { 
-	//doesn't submit, hides stop and shows start. 
+	//doesn't submit form, hides stop and shows start. 
 
 	// test:
 	console.log("changeChirp() runs");
@@ -69,7 +69,7 @@ function changeChirp(evt) {
 
 
 function startChirping(evt) {
-	//Passes user input to .py
+	//Passes user input to .py, calls makeChirp on results
 	
 	changeChirp(evt);
 

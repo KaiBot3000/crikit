@@ -1,22 +1,21 @@
 from flask import Flask, render_template, flash, request
 from flask_debugtoolbar import DebugToolbarExtension
-import json
 
 app=Flask(__name__)
-
 
 app.secret_key = 'crickets_chirping'
 
 
 @app.route('/crikit')
 def index_page():
-	#temp = request.args.get('test_info')
-	# temp = 'random string'
+
 	return render_template('crikit.html')
+
 
 @app.route('/chirp') 
 def chirp():
-
+	""" Takes in user info, sends back interval of chirps as chirp_time
+	"""
 	# Gets user info from url
 	choice = request.args.get('user_choice')
 	temp = request.args.get('user_temp')
@@ -27,29 +26,32 @@ def chirp():
 	# Set to string w/info for check
 	test_string = "user chose %s with %s" % (choice, temp)
 
-	return test_string
+	chirp_time = 0
+	if choice == "use_user_temp":
+		chirp_time = chirp_calc(temp)
+
+	# else (user_choice would be get location)
+		# somehow get location from js, 
+		# pass latlong to api, get temp
+		# use temp to get interval
+
+	return "chirp time: %s" % chirp_time
 
 
-# def chirp_calc(temp):
-# 	# uses temp to determine time interval btwn chirps
-# 	temp = float(temp)
-# 	chirps_per_minute = 40 + 4 * (temp - 50)
-# 	#chirps_per_ms = chirps_per_minute * (1 / 60000)
-# 	chirp_time = 60000 / chirps_per_minute
-# 	return chirp_time
+# def get_temp(lat, long):
+# 	uses js geolocate coordinates and api to get temp
 
+# 	return temp
 
-# def get_temp_from_ip(ip)
-	# get_location(ip) 
-	# gets temp from locality via wunderground
-	#
-	# return temp
+def chirp_calc(temp):
+	"""uses temp to determine time interval btwn chirps"""
+	
+	temp = float(temp)
+	chirps_per_minute = 40 + 4 * (temp - 50)
+	chirp_time = 60000 / chirps_per_minute
 
+	return chirp_time
 
-
-# def get_location(ip)
-	# gets location 
-	# returns location in format wunderground can use
 
 if __name__ == "__main__":
 	app.run(debug=True)
