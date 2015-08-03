@@ -20,12 +20,6 @@ def chirp():
 	choice = request.args.get('user_choice')
 	temp = request.args.get('user_temp')
 
-	# Checks that above is getting correctly
-	print "user chose %s with %s" % (choice, temp)
-
-	# Set to string w/info for check
-	test_string = "user chose %s with %s" % (choice, temp)
-
 	chirp_time = None
 	if choice == "use_user_temp":
 		chirp_time = chirp_calc(temp)
@@ -35,8 +29,7 @@ def chirp():
 		# pass latlong to api, get temp
 		# use temp to get interval
 
-	# can't pass a float, for some reason :(
-	print "flask returns chirp_time: %s" % chirp_time
+	# can't pass a float; returns server error :(
 	return str(chirp_time) 
 
 
@@ -53,7 +46,6 @@ def chirp_calc(temp):
 	chirps_per_minute = 40 + 4 * (temp - 50)
 	chirp_time = 60000 / chirps_per_minute
 
-	print "flask calculates chirp_time: %s" % chirp_time
 	return chirp_time
 
 
