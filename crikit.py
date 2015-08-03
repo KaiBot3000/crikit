@@ -35,7 +35,8 @@ def chirp():
 		# pass latlong to api, get temp
 		# use temp to get interval
 
-	return "chirp time: %s" % chirp_time
+	# can't pass a float, for some reason :(
+	return str(chirp_time) 
 
 
 # def get_temp(lat, long):

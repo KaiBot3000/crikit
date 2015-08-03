@@ -4,7 +4,7 @@
 	<link href="../static/crikit.css" rel="stylesheet">
 </head>
 
-<body onload="loadSound();">
+<body>
 	<!-- test line -->
 	<div id="test_box"> </div>
 	
@@ -43,30 +43,32 @@
 
 
 <script>
+// Makes js wait until DOM is loaded to execute (allows sound to load)
+// function closed/finished at end of script
+//$(document).ready(function(){
+
+
 // assigns variables to elements
 var start_chirp = document.getElementById("start_chirp_div");
 var stop_chirp = document.getElementById("stop_chirp_div");
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
 // needed for sound.js
+var soundPath = "static/crikit_chirp.mp3"
 var soundID = "Chirp";
-var keep_chirping = 1;
+var keep_chirping = true;
 
 // sets initial state for site
 $(start_chirp).show();
 $(stop_chirp).hide();
 
+// Calls appropriate function for button clicks.
+$("#start_chirping_button").on('click', startChirping);
+$("#stop_chirping_button").on('click', stopChirping);
+
 function loadSound() {
-	createjs.Sound.registerSound("static/crikit_chirp.mp3", soundID);
+	createjs.Sound.registerSound(soundPath, soundID);
 };
-
-// function playSound() {
-// 	//while (keep_chirping === 1) {
-// 		createjs.Sound.play(soundID);
-// 	//};
-// };
-
-
 
 
 function changeChirp(evt) { 
@@ -98,7 +100,7 @@ function startChirping(evt) {
 	// test: prints out url to console
 	console.log("user info url: " + url);
 
-	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize data.
+	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize results?
 	// $.get(url, makeChirps(results));
 	// Using an anonymous function that calls makeChirp works. Hm.
 	$.get(url, function (results) {
@@ -107,21 +109,30 @@ function startChirping(evt) {
 
 };
 
-function setWorks() {
-	console.log("setInterval is setting");
+
+function playSound() {
+	while (keep_chirping) {
+		createjs.Sound.play(soundID);
+		console.log("chirp");
+	};
 };
 
 
-function makeChirps(chirp_time) {
+function makeChirps(chirp_time_string) {
 	// Takes in a time between chirps, and chirps at that interval. Returns nothing.
 
-	//setInterval(playSound, chirp_time);
-	setInterval(setWorks, chirp_time);
-	console.log("chirp_time party, woo!");
-	
 	// test: 
-	console.log("got into chirp_time");
-	console.log(chirp_time);
+	console.log("got into makeChirps");
+	console.log(chirp_time_string);
+
+	chirp_time = Number(chirp_time_string);
+
+	// setInterval(playSound, chirp_time);
+	while (keep_chirping) {
+		setInterval(function() {
+			playSound();
+		}, chirp_time);
+	};
 };
 
 
@@ -129,15 +140,28 @@ function stopChirping(evt) {
 	// stop chirping and return to start page.
 
 	changeChirp(evt);
-	keep_chirping = 0;
-	// clearInterval(chirping);
+
 	// Will need to stop chirping, too.
+	// clearInterval(chirping);
+	keep_chirping = false;
 
 };
 
-// Calls appropriate function for button clicks.
-$("#start_chirping_button").on('click', startChirping);
-$("#stop_chirping_button").on('click', stopChirping);
+// FUNCTION GRAVEYARD (testing functions/other ideas)
+
+
+// function setWorks() {
+// 	console.log("setInterval is setting");
+// };
+
+// ayk's suggestion on http://stackoverflow.com/questions/5484205/call-function-with-setinterval-in-jquery
+// function test(chirp_time) {
+// 	console.log("test called");
+// 	setTimeout(test, chirp_time);
+// };
+
+// closing docready
+//});
 
 </script>
 

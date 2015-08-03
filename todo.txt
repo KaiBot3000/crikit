@@ -2,14 +2,14 @@ BASIC FUNCTIONALITY
 O chirp
 	http://www.createjs.com/tutorials/Basics%20and%20Best%20Practices/
 	$.playSound('http://example.org/sound'); //that simple?
-	O play noises!
+	0 play noises!
 	O time noises
 O get location
 O get temperature from location
 	O figure out API
 0 make html one page
 	0 seperate forms in divs
-O implement ajax
+0 implement ajax
 O figure out buttons (http://jsfiddle.net/T7gE7/4/)
 	// need buttons to interact in radio way, but allow text.
 
@@ -30,3 +30,34 @@ O make buttons prettier
 O resize
 O add 'crickit' logo to footer
 O make text box smaller/translucent/colored
+
+
+
+Crikit should...
+
+(enter temp and click button)
+button click calls startChirping
+	startChirping
+		calls changeChirp
+			changeChirp
+				prints "changeChirp runs"
+				prevents default
+				toggles div view
+		prints "re-enters startChirping"
+		prints formatted url it will pass
+		passes url to server, calls makeChirps on result
+			makeChirps
+				prints "got into chirp_time"
+				runs set interval or whatever I have going
+
+
+
+
+
+
+
+
+
+
+
+				
