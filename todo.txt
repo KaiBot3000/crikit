@@ -45,7 +45,10 @@ button click calls startChirping
 				toggles div view
 		prints "re-enters startChirping"
 		prints formatted url it will pass
-		passes url to server, calls makeChirps on result
+		passes url to server
+			server: calculates, prints
+					passes, prints
+		calls makeChirps on result from server
 			makeChirps
 				prints "got into chirp_time"
 				runs set interval or whatever I have going
@@ -60,4 +63,3 @@ button click calls startChirping
 
 
 
-				

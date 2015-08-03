@@ -45,7 +45,7 @@
 <script>
 // Makes js wait until DOM is loaded to execute (allows sound to load)
 // function closed/finished at end of script
-//$(document).ready(function(){
+//s$(document).ready(function(){
 
 
 // assigns variables to elements
@@ -76,7 +76,7 @@ function changeChirp(evt) {
 
 	// test:
 	console.log("changeChirp() runs");
-
+	//playSound();
 	// don't submit form
 	evt.preventDefault();
 
@@ -90,7 +90,7 @@ function startChirping(evt) {
 	//Passes user input to .py, calls makeChirp on results
 	
 	changeChirp(evt);
-
+	loadSound();
 	// test:
 	console.log("re-enters startChirping");
 
@@ -111,10 +111,8 @@ function startChirping(evt) {
 
 
 function playSound() {
-	while (keep_chirping) {
 		createjs.Sound.play(soundID);
 		console.log("chirp");
-	};
 };
 
 
@@ -128,11 +126,9 @@ function makeChirps(chirp_time_string) {
 	chirp_time = Number(chirp_time_string);
 
 	// setInterval(playSound, chirp_time);
-	while (keep_chirping) {
 		setInterval(function() {
 			playSound();
 		}, chirp_time);
-	};
 };
 
 

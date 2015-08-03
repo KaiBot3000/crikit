@@ -36,6 +36,7 @@ def chirp():
 		# use temp to get interval
 
 	# can't pass a float, for some reason :(
+	print "flask returns chirp_time: %s" % chirp_time
 	return str(chirp_time) 
 
 
@@ -52,6 +53,7 @@ def chirp_calc(temp):
 	chirps_per_minute = 40 + 4 * (temp - 50)
 	chirp_time = 60000 / chirps_per_minute
 
+	print "flask calculates chirp_time: %s" % chirp_time
 	return chirp_time
 
 
