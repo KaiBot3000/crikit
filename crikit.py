@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request
 from flask_debugtoolbar import DebugToolbarExtension
 import os
 import requests
+import json
 
 app=Flask(__name__)
 
@@ -42,6 +43,7 @@ def chirp():
 	chirp_time = chirp_calc(temperature)
 
 	# can't pass a float; returns server error :(
+	print str(chirp_time)
 	return str(chirp_time) 
 
 
@@ -55,17 +57,22 @@ def get_temp(lat, lon):
 	# location['lon'] = lon
 
 	# weather_data = requests.get(api_url, params=location)
-	weather_data = requests.get(api_url)
+	weather_response = requests.get(api_url)
+	weather_data = json.loads(weather_response.content)
 
-	print 'this is the url: %s' % api_url
-	print 'this is the weather_data: %s' % weather_data
+	# print '\n\n\n\n\n'
+	# # print 'this is the url: %s' % api_url
+	# print 'this is the weather_data: %s' % weather_data
+	# print '\n\n\n\n\n'
 
-	temp_kelvin = weather_data['main']['main.temp']
+	temp_kelvin = weather_data['main']['temp']
 
 	# converts kelvin to farenheit
 	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
 
+	print temp_farenheit
 	return temp_farenheit
+	# return 72
 
 
 def chirp_calc(temp):

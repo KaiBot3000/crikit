@@ -127,6 +127,8 @@ function startChirping(evt) {
 	// Sets path to chirp with variables from html form
 	var url = "/chirp?" + $("form").serialize();
 
+	console.log(url);
+
 	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize results?
 	$.get(url, makeChirps);
 	// Using an anonymous function that calls makeChirp works. Hm.
