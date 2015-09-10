@@ -11,12 +11,18 @@
 	<div id="start_chirp_div">
 		<br><br><br><br><br><br>
 		<form action="/chirp">
-			<input type="radio" class ="choice" name="user_choice" value="use_user_location"> Get temperature for my location
-			<br><br>
-			<input type="radio" class ="choice" name="user_choice" value="use_user_temp">
+
+			<span  id="use_location"> 
+				<input type="radio" class="choice" name="user_choice" value="use_user_location"> Get temperature for my location
+				<input type="hidden" id="lat_form" name="lat">
+				<input type="hidden" id="lon_form" name="lon">
+			</span><br><br>
+
+			<input type="radio" class="choice" name="user_choice" value="use_user_temp">
 			<input type="text" name="user_temp" id="temp_input"> Use this temperature
 			<br><br>
 			<input type="submit" id="start_chirping_button" value="Chirp">
+
 		</form>
 	</div>
 
@@ -53,6 +59,10 @@ var start_chirp = document.getElementById("start_chirp_div");
 var stop_chirp = document.getElementById("stop_chirp_div");
 var stop_button = document.getElementById("stop_chirping_button");
 var start_button = document.getElementById("start_chirping_button");
+var use_location = document.getElementById("use_location");
+var lat_spot = document.getElementById("lat_form");
+var lon_spot = document.getElementById("lon_form");
+
 // needed for sound.js
 var soundPath = "static/crikit_chirp.mp3"
 var soundID = "Chirp";
@@ -62,6 +72,7 @@ var chirping;
 // sets initial state for site
 $(start_chirp).show();
 $(stop_chirp).hide();
+$(use_location).hide();
 
 // Calls appropriate function for button clicks.
 $("#start_chirping_button").on('click', startChirping);
@@ -73,6 +84,31 @@ function loadSound() {
 	createjs.Sound.registerSound(soundPath, soundID);
 };
 
+function getLocation() {
+	if ("geolocation" in navigator) {
+			/* geolocation is available */
+			// console.log("I'm trying to geolocate");
+	  	navigator.geolocation.getCurrentPosition(function(position) {
+	  		// this sometimes takes a while to complete
+			// console.log("in geolocate");
+			var lat = position.coords.latitude;
+			var lon = position.coords.longitude;
+			$(lat_spot).val(lat);
+			$(lon_spot).val(lon);
+
+			$(use_location).show();
+
+			map_location = [position.coords.latitude, position.coords.longitude];
+			console.log("Your location is: " + map_location);
+		});
+
+		// console.log("out of function");
+	} else {
+		/* geolocation IS NOT available */
+			map_location = "not available :(";
+		  	console.log("user isn't allowing location tracking");
+	};
+};
 
 function changeChirp(evt) { 
 	//doesn't submit form, hides stop and shows start. 
@@ -92,11 +128,11 @@ function startChirping(evt) {
 	var url = "/chirp?" + $("form").serialize();
 
 	// SHOULD pass url to server, then call makeChirps() on resulting info. Doesn't recognize results?
-	//$.get(url, makeChirps(results));
+	$.get(url, makeChirps);
 	// Using an anonymous function that calls makeChirp works. Hm.
-	$.get(url, function (results) {
-		makeChirps(results);
-	});
+	// $.get(url, function (results) {
+	// 	makeChirps(results);
+	// });
 };
 
 
@@ -120,6 +156,9 @@ function stopChirping(evt) {
 	changeChirp(evt);
 	clearInterval(chirping);
 };
+
+
+getLocation();
 
 // closing docready
 //});

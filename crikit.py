@@ -28,15 +28,18 @@ def chirp():
 	# Gets user info from url
 	choice = request.args.get('user_choice')
 	temp = request.args.get('user_temp')
+	lat = request.args.get('lat')
+	lon = request.args.get('lon')
 
 	chirp_time = None
 	if choice == 'use_user_temp':
-		chirp_time = chirp_calc(temp)
+		# chirp_time = chirp_calc(temp)
+		temperature = temp
 
-	# else (user_choice would be get location)
-		# somehow get location from js, 
-		# pass latlong to api, get temp
-		# use temp to get interval
+	else: #(user_choice would be get location)
+		temperature = get_temp(lat, lon)
+	
+	chirp_time = chirp_calc(temperature)
 
 	# can't pass a float; returns server error :(
 	return str(chirp_time) 
@@ -44,16 +47,22 @@ def chirp():
 
 def get_temp(lat, lon):
 	# uses js geolocate coordinates and api to get temp
-	api_url = 'api.openweathermap.org/data/2.5/weather' # ?lat=%s&lon=%s' % (lat, lon)
+	# api_url = 'http://api.openweathermap.org/data/2.5/weather' # ?lat=%s&lon=%s' % (lat, lon)
+	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s' % (lat, lon)
 
-	location = {}
-	location['lat'] = lat
-	location['lon'] = lon
+	# location = {}
+	# location['lat'] = lat
+	# location['lon'] = lon
 
-	weather_data = response.get(api_url, params=location)
+	# weather_data = requests.get(api_url, params=location)
+	weather_data = requests.get(api_url)
+
+	print 'this is the url: %s' % api_url
+	print 'this is the weather_data: %s' % weather_data
 
 	temp_kelvin = weather_data['main']['main.temp']
 
+	# converts kelvin to farenheit
 	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
 
 	return temp_farenheit
