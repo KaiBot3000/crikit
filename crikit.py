@@ -8,12 +8,8 @@ app=Flask(__name__)
 
 app.secret_key = 'crickets_chirping'
 
+# do I need this?
 weather_key = os.environ['WEATHER_API_KEY']
-
-@app.route('/')
-def geolocate():
-
-	return render_template('geolocateplay.html')
 
 
 @app.route('/crikit')
@@ -24,8 +20,8 @@ def index_page():
 
 @app.route('/chirp') 
 def chirp():
-	""" Takes in user info, sends back interval of chirps as chirp_time
-	"""
+	'''Takes in user info, sends back interval of chirps as chirp_time'''
+
 	# Gets user info from url
 	choice = request.args.get('user_choice')
 	temp = request.args.get('user_temp')
@@ -34,7 +30,6 @@ def chirp():
 
 	chirp_time = None
 	if choice == 'use_user_temp':
-		# chirp_time = chirp_calc(temp)
 		temperature = temp
 
 	else: #(user_choice would be get location)
@@ -43,27 +38,16 @@ def chirp():
 	chirp_time = chirp_calc(temperature)
 
 	# can't pass a float; returns server error :(
-	print str(chirp_time)
 	return str(chirp_time) 
 
 
 def get_temp(lat, lon):
-	# uses js geolocate coordinates and api to get temp
-	# api_url = 'http://api.openweathermap.org/data/2.5/weather' # ?lat=%s&lon=%s' % (lat, lon)
+	'''Takes in coordinates, makes api call to get temperature and return in Farenheit'''
+
 	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s' % (lat, lon)
 
-	# location = {}
-	# location['lat'] = lat
-	# location['lon'] = lon
-
-	# weather_data = requests.get(api_url, params=location)
 	weather_response = requests.get(api_url)
 	weather_data = json.loads(weather_response.content)
-
-	# print '\n\n\n\n\n'
-	# # print 'this is the url: %s' % api_url
-	# print 'this is the weather_data: %s' % weather_data
-	# print '\n\n\n\n\n'
 
 	temp_kelvin = weather_data['main']['temp']
 
@@ -72,11 +56,10 @@ def get_temp(lat, lon):
 
 	print temp_farenheit
 	return temp_farenheit
-	# return 72
 
 
 def chirp_calc(temp):
-	"""uses temp to determine time interval btwn chirps"""
+	'''Takes temperature, returns chirp interval'''
 
 	temp = float(temp)
 	chirps_per_minute = 40 + 4 * (temp - 50)
@@ -85,7 +68,7 @@ def chirp_calc(temp):
 	return chirp_time
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	app.run(debug=True)
 
 
