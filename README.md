@@ -1,4 +1,3 @@
-![image](/static/readme_image2.png)
 ![image](/static/readme_image3.png)
 # Crikit
 
