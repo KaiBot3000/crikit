@@ -13,7 +13,9 @@
 		<form action='/chirp'>
 
 			<span  id='use_location'> 
-				<input type='radio' class='choice' name='user_choice' value='use_user_location'> Get temperature for my location
+				<input type='radio' class='choice' name='user_choice' value='use_user_location'> 
+				Get temperature for my location
+				<!-- <span id='geolocate_status'>Waiting for Geolocate</span> -->
 				<input type='hidden' id='lat_form' name='lat'>
 				<input type='hidden' id='lon_form' name='lon'>
 			</span><br><br>
@@ -50,20 +52,20 @@
 // function closed/finished at end of script
 //s$(document).ready(function(){
 
-
 // assigns variables to elements
 var start_chirp = document.getElementById('start_chirp_div');
 var stop_chirp = document.getElementById('stop_chirp_div');
 var stop_button = document.getElementById('stop_chirping_button');
 var start_button = document.getElementById('start_chirping_button');
-var use_location = document.getElementById('use_location');
+var geo_status = document.getElementById('geol');
+var use_location = document.getElementById('geolocate_status');
 var lat_spot = document.getElementById('lat_form');
 var lon_spot = document.getElementById('lon_form');
 
 // needed for sound.js
 var soundPath = 'static/crikit_chirp.mp3'
 var soundID = 'Chirp';
-// needed to set/clearInterval()
+// needed to set clearInterval()
 var chirping;
 
 // sets initial state for site
@@ -84,7 +86,6 @@ function loadSound() {
 function getLocation() {
 	if ('geolocation' in navigator) {
 			/* geolocation is available */
-			// console.log("I'm trying to geolocate");
 	  	navigator.geolocation.getCurrentPosition(function(position) {
 	  		// this sometimes takes a while to complete
 			var lat = position.coords.latitude;
@@ -121,7 +122,6 @@ function startChirping(evt) {
 
 	// Sets path to chirp with variables from html form
 	var url = '/chirp?' + $('form').serialize();
-
 	$.get(url, makeChirps);
 };
 
@@ -135,6 +135,7 @@ function playSound() {
 function makeChirps(chirp_time_string) {
 	// Takes in a time between chirps, and chirps at that interval. Returns nothing
 	chirp_time = Number(chirp_time_string);
+
 	if (chirp_time) {
 		chirping = setInterval(playSound, chirp_time);
 	};
