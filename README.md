@@ -1,4 +1,4 @@
-![image](/static/readme_image.png)
+![image](/static/readme_image2.png)
 # Crikit
 
 What did we do before thermometers? In the late 1800's two men independently published equations which tied temperature to the frequency of a crickit's chirps. Crikit works in two ways: it either uses a temperature the user provides, or uses geolocate data and the OpenWeatherMap API to get the temperature at the user's location. It then generates a chirping noise consistent with that temperature. 
