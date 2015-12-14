@@ -36,7 +36,7 @@ def chirp():
 		temperature = get_temp(lat, lon)
 
 	# check if crikit would be chirping
-	if temperature > 55.0 and temperature < 100.0:
+	if temperature > 40.0 and temperature < 100.0:
 		chirp_time = chirp_calc(temperature)
 	else:
 		chirp_time = 0
@@ -49,22 +49,23 @@ def chirp():
 def get_temp(lat, lon):
 	'''Takes in coordinates, makes api call to get temperature and return in Farenheit'''
 
-	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s' % (lat, lon)
-
+	print '\n\n\n\n\n\n\n\n\n\n\nkey', weather_key
+	print 'latlon', lat, lon
+	lat = 37.7833
+	lon = 122.4167
+	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s' % (lat, 
+																						 lon,
+																						 weather_key)
+	print 'api url', api_url
 	weather_response = requests.get(api_url)
 	print 'made call to weather api'
-	print weather_response
-
+	print 'weather response', weather_response
 	weather_data = json.loads(weather_response.content)
-
-	print weather_data
-
+	print 'data', weather_data
 	temp_kelvin = weather_data['main']['temp']
-
 	# converts kelvin to farenheit
 	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
-
-	print type(temp_farenheit)
+	print 'type', type(temp_farenheit)
 	return temp_farenheit
 
 
