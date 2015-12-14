@@ -8,8 +8,7 @@ app=Flask(__name__)
 
 app.secret_key = 'crickets_chirping'
 
-# API doesn't actually require key
-# weather_key = os.environ['WEATHER_API_KEY']
+weather_key = os.environ['WEATHER_API_KEY']
 
 
 @app.route('/crikit')
@@ -31,13 +30,13 @@ def chirp():
 	chirp_time = None
 
 	if choice == 'use_user_temp':
-		temperature = temp
+		temperature = float(temp)
 
 	else: #(user_choice would be get location)
 		temperature = get_temp(lat, lon)
 
 	# check if crikit would be chirping
-	if int(temperature) in range(55, 100):
+	if temperature > 55.0 and temperature < 100.0:
 		chirp_time = chirp_calc(temperature)
 	else:
 		chirp_time = 0
@@ -53,21 +52,26 @@ def get_temp(lat, lon):
 	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s' % (lat, lon)
 
 	weather_response = requests.get(api_url)
+	print 'made call to weather api'
+	print weather_response
+
 	weather_data = json.loads(weather_response.content)
+
+	print weather_data
 
 	temp_kelvin = weather_data['main']['temp']
 
 	# converts kelvin to farenheit
 	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
 
-	print temp_farenheit
+	print type(temp_farenheit)
 	return temp_farenheit
 
 
 def chirp_calc(temp):
-	'''Takes temperature, returns chirp interval'''
+	'''Takes float temperature, returns chirp interval'''
 
-	temp = float(temp)
+	# temp = float(temp)
 	chirps_per_minute = 40 + 4 * (temp - 50)
 	chirp_time = 60000 / chirps_per_minute
 
