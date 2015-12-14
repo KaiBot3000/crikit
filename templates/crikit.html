@@ -6,7 +6,7 @@
 
 <body>
 	<!-- test line -->
-	<div id='test_box'> </div>
+	<div id='alerts'> </div>
 	
 	<div id='start_chirp_div'>
 		<br><br><br><br><br><br>
@@ -35,12 +35,6 @@
 		</form>
 	</div>
 
-	<ul>
-		{% for message in get_flashed_messages() %}
-			<li> {{ message }} </li>
-		{% endfor %}
-	</ul>
-
 </body>
 <script src='https://code.jquery.com/jquery.js'> </script>
 <script src='https://code.createjs.com/soundjs-0.6.1.min.js'></script>
@@ -61,6 +55,7 @@ var geo_status = document.getElementById('geol');
 var use_location = document.getElementById('geolocate_status');
 var lat_spot = document.getElementById('lat_form');
 var lon_spot = document.getElementById('lon_form');
+var alerts = document.getElementById('alerts');
 
 // needed for sound.js
 var soundPath = 'static/crikit_chirp.mp3'
@@ -122,6 +117,7 @@ function startChirping(evt) {
 
 	// Sets path to chirp with variables from html form
 	var url = '/chirp?' + $('form').serialize();
+	console.log(url);
 	$.get(url, makeChirps);
 };
 

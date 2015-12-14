@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request
+from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 import os
 import requests
@@ -8,8 +8,8 @@ app=Flask(__name__)
 
 app.secret_key = 'crickets_chirping'
 
-# do I need this?
-weather_key = os.environ['WEATHER_API_KEY']
+# API doesn't actually require key
+# weather_key = os.environ['WEATHER_API_KEY']
 
 
 @app.route('/crikit')
@@ -29,14 +29,20 @@ def chirp():
 	lon = request.args.get('lon')
 
 	chirp_time = None
+
 	if choice == 'use_user_temp':
 		temperature = temp
 
 	else: #(user_choice would be get location)
 		temperature = get_temp(lat, lon)
-	
-	chirp_time = chirp_calc(temperature)
 
+	# check if crikit would be chirping
+	if int(temperature) in range(55, 100):
+		chirp_time = chirp_calc(temperature)
+	else:
+		chirp_time = 0
+
+	print chirp_time
 	# can't pass a float; returns server error :(
 	return str(chirp_time) 
 
