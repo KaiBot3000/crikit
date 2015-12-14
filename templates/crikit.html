@@ -13,14 +13,15 @@
 		<form action='/chirp'>
 
 			<span  id='use_location'> 
-				<input type='radio' class='choice' name='user_choice' value='use_user_location'> 
-				Get temperature for my location
-				<!-- <span id='geolocate_status'>Waiting for Geolocate</span> -->
+				<input type='radio' class='choice' name='user_choice' required value='use_user_location' disabled id='use_geo_button'> 
+				Get temperature for my location 
+					<!-- <span id='enable-geo'> (needs to be enabled) </span> -->
+					<span id='wait'> (Waiting for Geolocate) </span>
 				<input type='hidden' id='lat_form' name='lat'>
 				<input type='hidden' id='lon_form' name='lon'>
 			</span><br><br>
 
-			<input type='radio' class='choice' name='user_choice' value='use_user_temp'>
+			<input type='radio' class='choice' name='user_choice' required value='use_user_temp' checked='checked'>
 			<input type='text' name='user_temp' id='temp_input'> Use this temperature
 			<br><br>
 			<input type='submit' id='start_chirping_button' value='Chirp'>
@@ -47,14 +48,18 @@
 //s$(document).ready(function(){
 
 // assigns variables to elements
+// divs
 var start_chirp = document.getElementById('start_chirp_div');
+var start_button = document.getElementById('start_chirping_button');
+
 var stop_chirp = document.getElementById('stop_chirp_div');
 var stop_button = document.getElementById('stop_chirping_button');
-var start_button = document.getElementById('start_chirping_button');
-var geo_status = document.getElementById('geol');
-var use_location = document.getElementById('geolocate_status');
-var lat_spot = document.getElementById('lat_form');
-var lon_spot = document.getElementById('lon_form');
+
+// var geo_status = document.getElementById('geolocate_status');
+var use_location = document.getElementById('use_location');
+// var lat_spot = document.getElementById('lat_form');
+// var lon_spot = document.getElementById('lon_form');
+
 var alerts = document.getElementById('alerts');
 
 // needed for sound.js
@@ -66,7 +71,7 @@ var chirping;
 // sets initial state for site
 $(start_chirp).show();
 $(stop_chirp).hide();
-$(use_location).hide();
+// $(use_location).hide();
 
 // Calls appropriate function for button clicks.
 $('#start_chirping_button').on('click', startChirping);
@@ -85,24 +90,24 @@ function getLocation() {
 	  		// this sometimes takes a while to complete
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
-			$(lat_spot).val(lat);
-			$(lon_spot).val(lon);
+			$('#lat_form').val(lat);
+			$('#lon_form').val(lon);
 
-			$(use_location).show();
+			$('#wait').hide();
+			$('#use_geo_button').attr('disabled', false);
 
-			map_location = [position.coords.latitude, position.coords.longitude];
+			var map_location = [position.coords.latitude, position.coords.longitude];
 			console.log('Your location is: ' + map_location);
 		});
 
 	} else {
 		/* geolocation IS NOT available */
-			map_location = 'not available :(';
-		  	console.log('user isn\'t allowing location tracking');
+	  	console.log('user isn\'t allowing location tracking');
 	};
 };
 
 function changeChirp(evt) { 
-	//doesn't submit form, hides stop and shows start. 
+	//doesn't submit form, changes hich div is visible. 
 	evt.preventDefault();
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
@@ -110,7 +115,7 @@ function changeChirp(evt) {
 
 
 function startChirping(evt) {
-	//Passes user input to .py, calls makeChirp on results
+	//Passes user input to server, calls makeChirp on results
 	
 	changeChirp(evt);
 	loadSound();
