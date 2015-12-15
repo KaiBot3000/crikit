@@ -27,6 +27,12 @@ Install dependencies:
 $ pip install -r requirements.txt
 ```
 
+Get an API Key from [OpenWeather](http://openweathermap.org/appid "API Key") and save it as an 
+environmental variable:
+```sh
+$ export WEATHER_API_KEY=[your app id here]
+```
+
 Run the Crikit server:
 ```sh
 $ python crikit.py
