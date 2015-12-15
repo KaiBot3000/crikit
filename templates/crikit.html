@@ -6,20 +6,18 @@
 
 <body>
 	<!-- test line -->
-	<div id='alerts'> </div>
+	<!-- <div id='alerts'></div> -->
 	
 	<div id='start_chirp_div'>
 		<br><br><br><br><br><br>
 		<form action='/chirp'>
 
-			<span  id='use_location'> 
 				<input type='radio' class='choice' name='user_choice' required value='use_user_location' disabled id='use_geo_button'> 
 				Get temperature for my location 
-					<!-- <span id='enable-geo'> (needs to be enabled) </span> -->
 					<span id='wait'> (Waiting for Geolocate) </span>
 				<input type='hidden' id='lat_form' name='lat'>
 				<input type='hidden' id='lon_form' name='lon'>
-			</span><br><br>
+			<br><br>
 
 			<input type='radio' class='choice' name='user_choice' required value='use_user_temp' checked='checked'>
 			<input type='text' name='user_temp' id='temp_input'> Use this temperature
@@ -34,6 +32,7 @@
 		<form action='/crikit'>
 			<input type='submit' id='stop_chirping_button' value='Stop Chirping'>
 		</form>
+		<div id='alerts'></div>
 	</div>
 
 </body>
@@ -51,10 +50,10 @@
 // TODO: switch to just jQuery (hadn't learned when this project was started)
 // divs
 var start_chirp = document.getElementById('start_chirp_div');
-var start_button = document.getElementById('start_chirping_button');
+// var start_button = document.getElementById('start_chirping_button');
 
 var stop_chirp = document.getElementById('stop_chirp_div');
-var stop_button = document.getElementById('stop_chirping_button');
+// var stop_button = document.getElementById('stop_chirping_button');
 
 // var geo_status = document.getElementById('geolocate_status');
 var use_location = document.getElementById('use_location');
@@ -108,8 +107,9 @@ function getLocation() {
 };
 
 function changeChirp(evt) { 
-	//doesn't submit form, changes hich div is visible. 
+	//doesn't submit form, changes hich div is visible.
 	evt.preventDefault();
+	$('#alerts').html('');
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
 };
@@ -117,7 +117,6 @@ function changeChirp(evt) {
 
 function startChirping(evt) {
 	//Passes user input to server, calls makeChirp on results
-	
 	changeChirp(evt);
 	loadSound();
 
@@ -140,6 +139,9 @@ function makeChirps(chirp_time_string) {
 
 	if (chirp_time) {
 		chirping = setInterval(playSound, chirp_time);
+	} else {
+		//make error msg appear;
+		$('#alerts').html('No crickets would be chirping at this temp. Ahhhh, silence.');
 	};
 };
 
