@@ -1,7 +1,7 @@
 ![image](/static/readme_image3.png)
 # Crikit
 
-What did we do before thermometers? In the late 1800's two men independently published equations which tied temperature to the frequency of a crickit's chirps. Crikit works in two ways: it either uses a temperature the user provides, or uses geolocate data and the OpenWeatherMap API to get the temperature at the user's location. It then generates a chirping noise consistent with that temperature. 
+What did we do before thermometers? In the late 1800's two men independently published equations which tied temperature to the frequency of a cricket's chirps. Crikit works in two ways: it either uses a temperature the user provides, or uses geolocate data and the OpenWeatherMap API to get the temperature at the user's location. It then generates a chirping noise consistent with that temperature. 
 
 Crikit seeks to remind us of what we have lost by distancing ourselves from the natural world. 
 
@@ -27,7 +27,7 @@ Install dependencies:
 $ pip install -r requirements.txt
 ```
 
-Get an API Key from [OpenWeather](http://openweathermap.org/appid "API Key") and save it as an 
+If you want to use your local temperature, get an API Key from [OpenWeather](http://openweathermap.org/appid "API Key") and save it as an 
 environmental variable:
 ```sh
 $ export WEATHER_API_KEY=[your app id here]
