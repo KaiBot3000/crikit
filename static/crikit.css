@@ -28,6 +28,7 @@ body {
     position: absolute;
     bottom: 50px;
     left: 50px;
+    opacity: 0.65;
 }
 
 .toggle {
@@ -97,6 +98,7 @@ body {
   content:attr(data-off);
   position:absolute;
   top:12px;
+  color:#aaa;
   right:0;
   left:0;
   z-index:4;
@@ -117,6 +119,7 @@ body {
 .toggle input:checked + label:before {
   z-index:1;
   top:17px;
+  color:#666;
 }
     
     /* play button */
@@ -150,16 +153,16 @@ body {
 
 /*.toggle input:checked:hover + label {
   -webkit-box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 2px 14px -1px #ccc,
-    inset 0 10px 2px #fafafa,
+    inset 0 2px 14px -1px #404040,
+    inset 0 10px 2px #282828,
     inset 0 12px 0 white;
   -moz-box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 2px 14px -2px #ccc,
-    inset 0 10px 2px #fafafa,
+    inset 0 2px 14px -2px #404040,
+    inset 0 10px 2px #282828,
     inset 0 12px 0 white;
   box-shadow:0 2px 3px rgba(0,0,0,0.4),
-    inset 0 1px 14px -2px #ccc,
-    inset 0 10px 2px #fafafa,
+    inset 0 1px 14px -2px #404040,
+    inset 0 10px 2px #282828,
     inset 0 12px 0 white;
 }*/
 
