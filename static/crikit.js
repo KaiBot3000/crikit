@@ -27,6 +27,9 @@ function getLocation() {
     };
 }
 
+// TODO: get chirp_time *once* on load. Minimizes server requests, but also means user
+// can't easily reset their temperature/interval.
+
 function changeChirp() {
     if(this.checked) {
         loadSound();
