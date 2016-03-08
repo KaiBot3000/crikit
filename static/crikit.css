@@ -1,10 +1,8 @@
 body {
 	background-image: url("sunset_on_wheat_field_by_robke22.jpg");
-	background-size: 100%;
 	background-repeat: no-repeat;
-	color: white;
-	font-size: 2em;
-    position: relative;
+  background-size: cover;
+	color: black;
 }
 
 #start_chirp {
