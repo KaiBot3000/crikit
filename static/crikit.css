@@ -5,23 +5,25 @@ body {
 	color: black;
 }
 
-#start_chirp {
-	display: block;
-}
-
-#stop_chirp {
-	display: none;
+#wait {
+  color: white;
+  font-size: 3em;
+  float: right;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
 }
 
 /* Switch */
 /* Thanks to https://jsfiddle.net/tovic/ve8mU/light/ for base switch! */
 
-#switch {
-    float: right;
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
-    opacity: 0.65;
+#switch-span {
+  float: right;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  opacity: 0.65;
+  visibility: hidden;
 }
 
 .toggle {

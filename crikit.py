@@ -5,9 +5,7 @@ import requests
 import json
 
 app=Flask(__name__)
-
 app.secret_key = "crickets_chirping"
-
 weather_key = os.environ["WEATHER_API_KEY"]
 
 
@@ -41,8 +39,8 @@ def chirp():
 	else:
 		chirp_time = 0
 
-	print chirp_time
-	# can"t pass a float; returns server error :(
+	# print chirp_time
+	# can't pass a float; returns server error :(
 	return str(chirp_time) 
 
 
@@ -59,7 +57,8 @@ def get_temp(lat, lon):
 	weather_data = json.loads(weather_response.content)
 	temp_kelvin = weather_data["main"]["temp"]
 	# converts kelvin to farenheit
-	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
+	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32
+
 	return temp_farenheit
 
 
@@ -75,12 +74,3 @@ def chirp_calc(temp):
 
 if __name__ == "__main__":
 	app.run(debug=True)
-
-
-
-
-
-
-
-
-

@@ -6,15 +6,24 @@
 
 <body>
 	<!-- <div id="alerts"></div> -->
-	<span class="toggle" id="switch">
-	    <input type="checkbox">
+	<span id="switch-span" class="toggle" hidden>
+	    <input id="switch" type="checkbox" disabled>
 	    <label data-off="&#9724;" data-on="&#9654;"></label>
+	</span>
+
+	<span id="wait">
+		Wait
+	</span>
+
+	<span id="form">
+		<input type="hidden" id="lat_form" name="lat">
+		<input type="hidden" id="lon_form" name="lon">
 	</span>
 
 </body>
 
 <script src="https://code.jquery.com/jquery.js"> </script>
 <script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
-<script src="/static/crickit.js"></script>
+<script src="/static/crikit.js"></script>
 
 </html>
