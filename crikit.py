@@ -9,7 +9,7 @@ app.secret_key = "crickets_chirping"
 weather_key = os.environ["WEATHER_API_KEY"]
 
 
-@app.route("/crikit")
+@app.route("/")
 def index_page():
 
 	return render_template("crikit.html")
@@ -46,7 +46,7 @@ def get_temp(lat, lon):
 	try:
 		weather_response = requests.get(api_url)
 		weather_data = json.loads(weather_response.content)
-		print weather_data
+		# print weather_data
 		temp_kelvin = weather_data["main"]["temp"]
 		# converts kelvin to farenheit
 		temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32
