@@ -16,12 +16,7 @@ body {
 }
 
 /* Switch */
-
-/*body {
-  background-color:#4444;
-  text-align:center;
-  padding:85px 0;
-}*/
+/* Thanks to https://jsfiddle.net/tovic/ve8mU/light/ for base switch! */
 
 #switch {
     float: right;
