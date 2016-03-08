@@ -6,7 +6,7 @@ What did we do before thermometers? In the late 1800's two men independently pub
 Crikit seeks to remind us of what we have lost by distancing ourselves from the natural world. 
 
 ### Sidenote:
-This was my first solo web app, and I've since refactored it significantly. I left my original code in branch `original-version` for comparison.
+This was my first solo web app, and I've since refactored it significantly. I left my original code in branch `original-version` for comparison and derision.
 
 **Original Version:**
 - Allowed user to input their own temperature
