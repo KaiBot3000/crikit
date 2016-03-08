@@ -5,13 +5,28 @@ body {
 	color: black;
 }
 
-#wait {
+div {
   color: white;
   font-size: 3em;
+  background-color: black;
+  opacity: 0.5;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+div:empty {
+  opacity: 0;
+}
+
+#wait {
   float: right;
   position: absolute;
   bottom: 50px;
   left: 50px;
+}
+
+#alerts {
+  float: left;
 }
 
 /* Switch */

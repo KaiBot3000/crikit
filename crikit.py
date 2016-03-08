@@ -53,11 +53,15 @@ def get_temp(lat, lon):
 	api_url = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s" % (lat, 
 																						 lon,
 																						 weather_key)
-	weather_response = requests.get(api_url)
-	weather_data = json.loads(weather_response.content)
-	temp_kelvin = weather_data["main"]["temp"]
-	# converts kelvin to farenheit
-	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32
+	try:
+		weather_response = requests.get(api_url)
+		weather_data = json.loads(weather_response.content)
+		print weather_data
+		temp_kelvin = weather_data["main"]["temp"]
+		# converts kelvin to farenheit
+		temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32
+	except:
+		return 0
 
 	return temp_farenheit
 
