@@ -1,16 +1,9 @@
 var soundPath = "static/crikit_chirp.mp3"
 var soundID = "Chirp";
-var chirping;
-
-
-// on load, 
-// -get, set location
-// -determine chirptime
-// -on click, check data
-// -if off, stop chirp, if on, start
+var chirping, map_location;
 
 getLocation();
-$("#switch").change(change);
+$("#switch").change(changeChirp);
 
 function loadSound() {
     // Loads sound for chirp
@@ -21,45 +14,28 @@ function getLocation() {
     if ("geolocation" in navigator) {
             /* geolocation is available */
         navigator.geolocation.getCurrentPosition(function(position) {
-            // this sometimes takes a while to complete
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            $("#lat_form").val(lat);
-            $("#lon_form").val(lon);
-
+            // This may take a minute
             $("#alerts").html("");
             $("#switch-span").css("visibility", "visible");
-
-            var map_location = [position.coords.latitude, position.coords.longitude];
-            console.log("Your location is: " + map_location);
+            map_location = {latitude:position.coords.latitude, longitude:position.coords.longitude};
+            // console.log(map_location);
         });
 
     } else {
         /* geolocation IS NOT available */
-        console.log("user isn\'t allowing location tracking");
         $("#alerts").html("You need to allow geolocation for this to work :/");
     };
 }
 
-function change() {
+function changeChirp() {
     if(this.checked) {
-        startChirping();
+        loadSound();
+        var url = "/chirp?" + $.param(map_location);
+        $.get(url, makeChirps);
     } else {
-        stopChirping();
+        clearInterval(chirping);
+        $("#alerts").html("");
     }
-}
-
-function startChirping(evt) {
-    loadSound();
-    // Sets path to chirp with variables from html form
-    var url = "/chirp?" + $("form").serialize();
-    console.log(url);
-    $.get(url, makeChirps);
-}
-
-function stopChirping(evt) { 
-    clearInterval(chirping);
-    $("#alerts").html("");
 }
 
 function makeChirps(chirp_time_string) {

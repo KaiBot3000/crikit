@@ -19,28 +19,17 @@ def index_page():
 def chirp():
 	"Takes in user info, sends back interval of chirps as chirp_time"
 
-	# Gets user info from url
-	choice = request.args.get("user_choice")
-	temp = request.args.get("user_temp")
-	lat = request.args.get("lat")
-	lon = request.args.get("lon")
-
+	lat = request.args.get("latitude")
+	lon = request.args.get("longitude")
 	chirp_time = None
+	temperature = get_temp(lat, lon)
 
-	if choice == "use_user_temp":
-		temperature = float(temp)
-
-	else: #(user_choice would be get location)
-		temperature = get_temp(lat, lon)
-
-	# check if crikit would be chirping
+	# check if crickit would be chirping
 	if temperature > 40.0 and temperature < 85.0:
 		chirp_time = chirp_calc(temperature)
 	else:
 		chirp_time = 0
 
-	# print chirp_time
-	# can't pass a float; returns server error :(
 	return str(chirp_time) 
 
 
@@ -53,6 +42,7 @@ def get_temp(lat, lon):
 	api_url = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s" % (lat, 
 																						 lon,
 																						 weather_key)
+	# API has intermittent failures, so...
 	try:
 		weather_response = requests.get(api_url)
 		weather_data = json.loads(weather_response.content)
@@ -69,7 +59,6 @@ def get_temp(lat, lon):
 def chirp_calc(temp):
 	"Takes float temperature, returns chirp interval"
 
-	# temp = float(temp)
 	chirps_per_minute = 40 + 4 * (temp - 50)
 	chirp_time = 60000 / chirps_per_minute
 
