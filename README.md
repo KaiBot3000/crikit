@@ -7,28 +7,32 @@ Crikit seeks to remind us of what we have lost by distancing ourselves from the 
 
 ### Sidenote:
 This was my first solo web app, and I've since refactored it significantly. I left my original code in branch `original-version` for comparison.
-Original Version:
+
+**Original Version:**
 - Allowed user to input their own temperature
+- Ugly interface (What am I, a web-designer?!)
 - Submitted location info through a hacky hidden form
 - Had no error handling for API problems (OpenWeather isn't super reliable)
-- Constrained the background image so that white text in divs wouldn't be obscured (resulting in a crappy experience for oddly-shaped windows)
-- Worked out spacing of divs inside the html using `<br>`s. So many `<br>`s
+- Constrained the background image so that white text wouldn't be obscured (resulting in a crappy experience for oddly-shaped windows)
+- Worked out spacing of divs inside the html using `<br>`. So much `<br>`
 - I learned about AJAX halfway through, so of course found a way to use it even though I didn't really need it
+- Learned jQuery part way though, so used a mix of straight JS and jQuery (ew)
 
-Refactored Version:
-- Snazzy CSS toggle switch built on a checkbox
+**Refactored Version:**
+- Snazzy CSS toggle switch built on a checkbox (Aesthetics matter)
 - Resonsive background image
+- Separate javascript file with greatly simplified code
 - Simple error handling for out-of-range temperatures and API errors
-- Alert messages to help the user understand what's going on
-- Greatly simplified AJAX requests for crickit math (I could easily have done this entirely in the browser, but it was good practice)
+- Alert messages to help the user understand what's going on, with transparent background so they're readable
+- Greatly simplified AJAX requests for crickit math (I could easily have done this entirely in the browser, but chose to keep the server route as good practice)
 
-Overall this project is overkill in a few ways, but it's a fun project which I learned a lot doing. Enjoy! 
+Overall this is overkill in a few ways, but it's a fun project which I learned a lot doing. Enjoy! 
 
 
 ### The Stack
 * [Python] - Backend code that manipulates incoming data and serves data to the webpage through a framework.
 * [Flask] - Lightweight web framework which also provides support for jinja templating
-* [Javascript] - Frontend code which allows for dynamic webpages
+* [JavaScript] - Frontend code which allows for dynamic webpages
 * [jQuery] - A Javascript library that simplifies DOM manipulation, including creating event handlers for user interation
 * [AJAX] - Gets information from server without reloading the page, allowing for more dynamic pages and faster loading times
 * [HTML] - Displays information on the web
