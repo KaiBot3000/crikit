@@ -6,30 +6,30 @@ import json
 
 app=Flask(__name__)
 
-app.secret_key = 'crickets_chirping'
+app.secret_key = "crickets_chirping"
 
-weather_key = os.environ['WEATHER_API_KEY']
+weather_key = os.environ["WEATHER_API_KEY"]
 
 
-@app.route('/crikit')
+@app.route("/crikit")
 def index_page():
 
-	return render_template('crikit.html')
+	return render_template("crikit.html")
 
 
-@app.route('/chirp') 
+@app.route("/chirp") 
 def chirp():
-	'''Takes in user info, sends back interval of chirps as chirp_time'''
+	"Takes in user info, sends back interval of chirps as chirp_time"
 
 	# Gets user info from url
-	choice = request.args.get('user_choice')
-	temp = request.args.get('user_temp')
-	lat = request.args.get('lat')
-	lon = request.args.get('lon')
+	choice = request.args.get("user_choice")
+	temp = request.args.get("user_temp")
+	lat = request.args.get("lat")
+	lon = request.args.get("lon")
 
 	chirp_time = None
 
-	if choice == 'use_user_temp':
+	if choice == "use_user_temp":
 		temperature = float(temp)
 
 	else: #(user_choice would be get location)
@@ -42,29 +42,29 @@ def chirp():
 		chirp_time = 0
 
 	print chirp_time
-	# can't pass a float; returns server error :(
+	# can"t pass a float; returns server error :(
 	return str(chirp_time) 
 
 
 def get_temp(lat, lon):
-	'''Takes in coordinates, makes api call to get temperature and return in Farenheit'''
+	"Takes in coordinates, makes api call to get temperature and return in Farenheit"
 
 	# default values for testing
 	# lat = 37.7833
 	# lon = 122.4167
-	api_url = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s' % (lat, 
+	api_url = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s" % (lat, 
 																						 lon,
 																						 weather_key)
 	weather_response = requests.get(api_url)
 	weather_data = json.loads(weather_response.content)
-	temp_kelvin = weather_data['main']['temp']
+	temp_kelvin = weather_data["main"]["temp"]
 	# converts kelvin to farenheit
 	temp_farenheit = (temp_kelvin - 273.15) * 1.8 + 32 
 	return temp_farenheit
 
 
 def chirp_calc(temp):
-	'''Takes float temperature, returns chirp interval'''
+	"Takes float temperature, returns chirp interval"
 
 	# temp = float(temp)
 	chirps_per_minute = 40 + 4 * (temp - 50)
@@ -73,7 +73,7 @@ def chirp_calc(temp):
 	return chirp_time
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 	app.run(debug=True)
 
 
