@@ -1,44 +1,44 @@
 <!DOCTYPE>
 <html>
 <head>
-	<link href='../static/crikit.css' rel='stylesheet'>
+	<link href="../static/crikit.css" rel="stylesheet">
 </head>
 
 <body>
 	<!-- test line -->
-	<!-- <div id='alerts'></div> -->
+	<!-- <div id="alerts"></div> -->
 	
-	<div id='start_chirp_div'>
+	<div id="start_chirp_div">
 		<br><br><br><br><br><br>
-		<form action='/chirp'>
+		<form action="/chirp">
 
-				<input type='radio' class='choice' name='user_choice' required value='use_user_location' disabled id='use_geo_button'> 
+				<input type="radio" class="choice" name="user_choice" required value="use_user_location" disabled id="use_geo_button"> 
 				Get temperature for my location 
-					<span id='wait'> (Waiting for Geolocate) </span>
-				<input type='hidden' id='lat_form' name='lat'>
-				<input type='hidden' id='lon_form' name='lon'>
+					<span id="wait"> (Waiting for Geolocate) </span>
+				<input type="hidden" id="lat_form" name="lat">
+				<input type="hidden" id="lon_form" name="lon">
 			<br><br>
 
-			<input type='radio' class='choice' name='user_choice' required value='use_user_temp' checked='checked'>
-			<input type='text' name='user_temp' id='temp_input'> Use this temperature
+			<input type="radio" class="choice" name="user_choice" required value="use_user_temp" checked="checked">
+			<input type="text" name="user_temp" id="temp_input"> Use this temperature
 			<br><br>
-			<input type='submit' id='start_chirping_button' value='Chirp'>
+			<input type="submit" id="start_chirping_button" value="Chirp">
 
 		</form>
 	</div>
 
-	<div id='stop_chirp_div'>
+	<div id="stop_chirp_div">
 		<br><br><br><br><br><br><br><br><br><br>
-		<form action='/crikit'>
-			<input type='submit' id='stop_chirping_button' value='Stop Chirping'>
+		<form action="/crikit">
+			<input type="submit" id="stop_chirping_button" value="Stop Chirping">
 		</form>
-		<div id='alerts'></div>
+		<div id="alerts"></div>
 	</div>
 
 </body>
-<script src='https://code.jquery.com/jquery.js'> </script>
-<script src='https://code.createjs.com/soundjs-0.6.1.min.js'></script>
-<!-- <script src='/static/crickit.js'></script> -->
+<script src="https://code.jquery.com/jquery.js"> </script>
+<script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
+<!-- <script src="/static/crickit.js"></script> -->
 
 
 <script>
@@ -47,24 +47,24 @@
 //s$(document).ready(function(){
 
 // assigns variables to elements 
-// TODO: switch to just jQuery (hadn't learned when this project was started)
+// TODO: switch to just jQuery (hadn"t learned when this project was started)
 // divs
-var start_chirp = document.getElementById('start_chirp_div');
-// var start_button = document.getElementById('start_chirping_button');
+var start_chirp = document.getElementById("start_chirp_div");
+// var start_button = document.getElementById("start_chirping_button");
 
-var stop_chirp = document.getElementById('stop_chirp_div');
-// var stop_button = document.getElementById('stop_chirping_button');
+var stop_chirp = document.getElementById("stop_chirp_div");
+// var stop_button = document.getElementById("stop_chirping_button");
 
-// var geo_status = document.getElementById('geolocate_status');
-var use_location = document.getElementById('use_location');
-// var lat_spot = document.getElementById('lat_form');
-// var lon_spot = document.getElementById('lon_form');
+// var geo_status = document.getElementById("geolocate_status");
+var use_location = document.getElementById("use_location");
+// var lat_spot = document.getElementById("lat_form");
+// var lon_spot = document.getElementById("lon_form");
 
-var alerts = document.getElementById('alerts');
+var alerts = document.getElementById("alerts");
 
 // needed for sound.js
-var soundPath = 'static/crikit_chirp.mp3'
-var soundID = 'Chirp';
+var soundPath = "static/crikit_chirp.mp3"
+var soundID = "Chirp";
 // needed to set clearInterval()
 var chirping;
 
@@ -74,8 +74,8 @@ $(stop_chirp).hide();
 // $(use_location).hide();
 
 // Calls appropriate function for button clicks.
-$('#start_chirping_button').on('click', startChirping);
-$('#stop_chirping_button').on('click', stopChirping);
+$("#start_chirping_button").on("click", startChirping);
+$("#stop_chirping_button").on("click", stopChirping);
 
 
 function loadSound() {
@@ -84,32 +84,32 @@ function loadSound() {
 };
 
 function getLocation() {
-	if ('geolocation' in navigator) {
+	if ("geolocation" in navigator) {
 			/* geolocation is available */
 	  	navigator.geolocation.getCurrentPosition(function(position) {
 	  		// this sometimes takes a while to complete
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
-			$('#lat_form').val(lat);
-			$('#lon_form').val(lon);
+			$("#lat_form").val(lat);
+			$("#lon_form").val(lon);
 
-			$('#wait').hide();
-			$('#use_geo_button').attr('disabled', false);
+			$("#wait").hide();
+			$("#use_geo_button").attr("disabled", false);
 
 			var map_location = [position.coords.latitude, position.coords.longitude];
-			console.log('Your location is: ' + map_location);
+			console.log("Your location is: " + map_location);
 		});
 
 	} else {
 		/* geolocation IS NOT available */
-	  	console.log('user isn\'t allowing location tracking');
+	  	console.log("user isn\"t allowing location tracking");
 	};
 };
 
 function changeChirp(evt) { 
-	//doesn't submit form, changes hich div is visible.
+	//doesn"t submit form, changes hich div is visible.
 	evt.preventDefault();
-	$('#alerts').html('');
+	$("#alerts").html("");
 	$(start_chirp).toggle();
 	$(stop_chirp).toggle();
 };
@@ -121,7 +121,7 @@ function startChirping(evt) {
 	loadSound();
 
 	// Sets path to chirp with variables from html form
-	var url = '/chirp?' + $('form').serialize();
+	var url = "/chirp?" + $("form").serialize();
 	console.log(url);
 	$.get(url, makeChirps);
 };
@@ -129,7 +129,7 @@ function startChirping(evt) {
 
 function playSound() {
 		createjs.Sound.play(soundID);
-		console.log('chirp');
+		console.log("chirp");
 };
 
 
@@ -141,7 +141,7 @@ function makeChirps(chirp_time_string) {
 		chirping = setInterval(playSound, chirp_time);
 	} else {
 		//make error msg appear;
-		$('#alerts').html('No crickets would be chirping at this temp. Ahhhh, silence.');
+		$("#alerts").html("No crickets would be chirping at this temp. Ahhhh, silence.");
 	};
 };
 
