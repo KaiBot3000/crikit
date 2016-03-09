@@ -4,6 +4,14 @@ var chirping, map_location;
 
 getLocation();
 $("#switch").change(changeChirp);
+$("#info").hover(
+    function () {
+        $("#info").stop().animate({'right':'-20px'},200);
+    },
+    function () {
+        $("#info").stop().animate({'right':'-420px'},200);
+    }
+);
 
 function loadSound() {
     // Loads sound for chirp
