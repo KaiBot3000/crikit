@@ -5,7 +5,12 @@ body {
 	color: black;
 }
 
-div {
+div:empty {
+  opacity: 0;
+}
+
+#alerts {
+  float: left;
   color: white;
   font-size: 3em;
   background-color: black;
@@ -14,25 +19,10 @@ div {
   padding: 10px;
 }
 
-div:empty {
-  opacity: 0;
-}
-
-#wait {
-  float: right;
-  position: absolute;
-  bottom: 50px;
-  left: 50px;
-}
-
-#alerts {
-  float: left;
-}
-
 /* Switch */
 /* Thanks to https://jsfiddle.net/tovic/ve8mU/light/ for base switch! */
 
-#switch-span {
+#switch-div {
   float: right;
   position: absolute;
   bottom: 50px;

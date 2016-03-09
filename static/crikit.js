@@ -16,7 +16,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
             // This may take a minute
             $("#alerts").html("");
-            $("#switch-span").css("visibility", "visible");
+            $("#switch-div").css("visibility", "visible");
             map_location = {latitude:position.coords.latitude, longitude:position.coords.longitude};
             // console.log(map_location);
         });
