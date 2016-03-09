@@ -3,6 +3,7 @@ body {
 	background-repeat: no-repeat;
   background-size: cover;
 	color: black;
+  /*font-family: sans-serif;*/
 }
 
 div:empty {
@@ -24,7 +25,6 @@ h1 {
 
 #description {
   font-size: 30px;
-  /*margin: 20px;*/
 }
 
 #alerts {
@@ -39,6 +39,15 @@ h1 {
   width: 400px;
   right: -420px;
   padding: 20px;
+}
+
+p {
+  text-align: center;
+}
+
+#logo {
+  width: 50px;
+  height: 50px;
 }
 
 /* Switch */
